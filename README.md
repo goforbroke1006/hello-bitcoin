@@ -1,5 +1,11 @@
 # hello-bitcoin
 
+Training project to get skills working with bitcoin-cli.
+
+Based on bitcoin regtest (network for regression testing).
+
+### Usage
+
 ```shell
 # start environment
 docker-compose up -d
