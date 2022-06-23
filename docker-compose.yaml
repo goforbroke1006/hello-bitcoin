@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+
+  node-regtest:
+    image: docker.io/goforbroke1006/bitcoin:latest
+    command:
+      - -regtest
+    volumes:
+      - ./bitcoin-regtest-data/regtest:/root/.bitcoin/regtest
+    ports:
+      - "18443:18443" # regtest
+      - "18444:18444" # regtest
+      - "18445:18445" # regtest
+
+#  node-testnet:
+#    image: docker.io/goforbroke1006/bitcoin:latest
+#    command:
+#      - -testnet
+#    volumes:
+#      - ./bitcoin-testnet-data/testnet3:/root/.bitcoin/testnet3
+#    ports:
+#      - "18332:18332" # testnet

@@ -1,0 +1,9 @@
+# ide files
+/.idea
+
+# environment
+/venv
+
+# volumes
+/bitcoin-regtest-data
+/bitcoin-testnet-data
