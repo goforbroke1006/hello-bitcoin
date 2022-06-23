@@ -6,8 +6,12 @@ services:
     image: docker.io/goforbroke1006/bitcoin:latest
     command:
       - -regtest
+    environment:
+      BITCOIN_RPCUSER: bitcoin
+      BITCOIN_RPCPASSWORD: bitcoin
+      BITCOIN_REGTEST_CREATE_WALLETS: testwallet1,testwallet2
     volumes:
-      - ./bitcoin-regtest-data/regtest:/root/.bitcoin/regtest
+      - ./bitcoin-regtest-data/regtest/:/root/.bitcoin/regtest/
     ports:
       - "18443:18443" # regtest
       - "18444:18444" # regtest
