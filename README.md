@@ -1,6 +1,9 @@
 # hello-bitcoin
 
 ```shell
+# start environment
+docker-compose up -d
+
 # load wallets
 bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin loadwallet "testwallet1"
 bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin loadwallet "testwallet2"
