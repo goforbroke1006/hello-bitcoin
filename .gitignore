@@ -5,5 +5,6 @@
 /venv
 
 # volumes
-/bitcoin-regtest-data
+/bitcoin-regtest-data/regtest/*
+!/bitcoin-regtest-data/regtest/.gitkeep
 /bitcoin-testnet-data
