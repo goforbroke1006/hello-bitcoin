@@ -7,7 +7,7 @@ rpc_port = 18443
 
 
 def print_blocks_info():
-    rpc_client = AuthServiceProxy(f"http://{rpc_user}:{rpc_pass}@{rpc_host}:{rpc_port}", timeout=120)
+    rpc_client = AuthServiceProxy(f"http://{rpc_user}:{rpc_pass}@{rpc_host}:{rpc_port}", timeout=5)
 
     block_count = rpc_client.getblockcount()
     print("---------------------------------------------------------------")
