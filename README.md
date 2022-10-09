@@ -4,26 +4,20 @@ Training project to get skills working with bitcoin-cli.
 
 Based on bitcoin regtest (network for regression testing).
 
-### Usage
+* mainnet
+* testnet
+    * public test-blockchain
+    * works similarly as the mainnet blockchain
+    * safe way to test out some functionality;
+* regtest
+    * for regression tests
+    * runs as local private blockchain
+    * allows to create wallets
+    * allows to create blocks
+
+### Examples
 
 ```shell
-# start environment
-docker-compose up -d
-
-# load wallets
-bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin loadwallet "testwallet1"
-bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin loadwallet "testwallet2"
-
-# check balances
-bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin -rpcwallet=testwallet1 getbalance
-bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin -rpcwallet=testwallet2 getbalance
-
-# deposit to both wallets
-bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin generatetoaddress 100 $(bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin -rpcwallet=testwallet1 getnewaddress)
-bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin generatetoaddress 100 $(bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin -rpcwallet=testwallet2 getnewaddress)
-
-# get balances again
-bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin -rpcwallet=testwallet1 getbalance
-bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin -rpcwallet=testwallet2 getbalance
+bash examples/01-transaction/run.sh
 
 ```

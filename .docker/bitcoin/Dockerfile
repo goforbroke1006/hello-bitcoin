@@ -14,6 +14,7 @@ RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 
+# mainnet
 EXPOSE 8332
 EXPOSE 8333
 

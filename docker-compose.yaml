@@ -7,11 +7,8 @@ services:
     command:
       - -regtest
     environment:
-      BITCOIN_RPCUSER: bitcoin
-      BITCOIN_RPCPASSWORD: bitcoin
-      BITCOIN_REGTEST_CREATE_WALLETS: testwallet1,testwallet2
-    volumes:
-      - ./bitcoin-regtest-data/regtest/:/root/.bitcoin/regtest/
+      BITCOIN_RPC_USERNAME: bitcoin
+      BITCOIN_RPC_PASSWORD: bitcoin
     ports:
       - "18443:18443" # regtest
       - "18444:18444" # regtest

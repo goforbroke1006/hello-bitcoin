@@ -1,33 +1,27 @@
 #!/bin/bash
 
-BITCOIN_RPCUSER=${BITCOIN_RPCUSER:-bitcoin}
-BITCOIN_RPCPASSWORD=${BITCOIN_RPCPASSWORD:-bitcoin}
+BITCOIN_RPC_USERNAME=${BITCOIN_RPC_USERNAME:-bitcoin}
+BITCOIN_RPC_PASSWORD=${BITCOIN_RPC_PASSWORD:-bitcoin}
 
 mkdir -p /root/.bitcoin/
 rm -f /root/.bitcoin/bitcoin.conf
 touch /root/.bitcoin/bitcoin.conf
 chmod 0600 /root/.bitcoin/bitcoin.conf
 
-echo "regtest=1" >>/root/.bitcoin/bitcoin.conf &&
-  echo "rpcuser=${BITCOIN_RPCUSER}" >>/root/.bitcoin/bitcoin.conf &&
-  echo "rpcpassword=${BITCOIN_RPCPASSWORD}" >>/root/.bitcoin/bitcoin.conf &&
-  echo "regtest.rpcallowip=0.0.0.0/0" >>/root/.bitcoin/bitcoin.conf &&
-  echo "regtest.rpcbind=0.0.0.0" >>/root/.bitcoin/bitcoin.conf
+tee /root/.bitcoin/bitcoin.conf <<EOF
+rpcuser=${BITCOIN_RPC_USERNAME}
+rpcpassword=${BITCOIN_RPC_PASSWORD}
+regtest=1
+regtest.rpcallowip=0.0.0.0/0
+regtest.rpcbind=0.0.0.0
+EOF
+#fallbackfee=0.0002
 
-# create wallets for regtest
-if [[ -n ${BITCOIN_REGTEST_CREATE_WALLETS} ]]; then
-  bitcoind -conf=/root/.bitcoin/bitcoin.conf -regtest -daemon
-  sleep 5
+cat /root/.bitcoin/bitcoin.conf
 
-  for walletName in ${BITCOIN_REGTEST_CREATE_WALLETS//,/ }; do
-    bitcoin-cli -regtest -rpcuser="${BITCOIN_RPCUSER}" -rpcpassword="${BITCOIN_RPCPASSWORD}" createwallet "$walletName" || true
-  done
-
-  bitcoin-cli -regtest stop
-fi
+chmod -R 0777 /root/.bitcoin/
 
 # shellcheck disable=SC2068
 bitcoind -conf=/root/.bitcoin/bitcoin.conf -daemon -printtoconsole $@
-sleep 5
-chmod -R 0777 /root/.bitcoin/
+
 tail -f /dev/null
